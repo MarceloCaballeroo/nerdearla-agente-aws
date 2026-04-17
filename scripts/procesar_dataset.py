@@ -1,12 +1,13 @@
 import pandas as pd
 import json
 import re
+import sys
+import os
 from pathlib import Path
 
 
 def parse_anime_csv(csv_path: str, output_path: str) -> list[dict]:
     df = pd.read_csv(csv_path)
-
     df.columns = df.columns.str.strip()
 
     animes = []
@@ -122,9 +123,27 @@ def parse_anime_csv(csv_path: str, output_path: str) -> list[dict]:
     return animes
 
 
-if __name__ == "__main__":
-    import sys
-
+def main():
     csv_path = sys.argv[1] if len(sys.argv) > 1 else "Anime.csv"
     output_path = sys.argv[2] if len(sys.argv) > 2 else "data/anime_procesado.json"
-    parse_anime_csv(csv_path, output_path)
+    force = "--force" in sys.argv or "-f" in sys.argv
+
+    csv_file = Path(csv_path)
+    json_file = Path(output_path)
+
+    if not csv_file.exists():
+        print(f"ERROR: CSV no encontrado: {csv_path}")
+        sys.exit(1)
+
+    if json_file.exists() and not force:
+        print(f"[*] {json_file.name} ya existe. Usar --force para re-procesar.")
+        sys.exit(0)
+
+    if json_file.exists() and force:
+        print(f"[*] Forzando re-procesamiento de {csv_path}...")
+
+    parse_anime_csv(str(csv_file), str(json_file))
+
+
+if __name__ == "__main__":
+    main()
