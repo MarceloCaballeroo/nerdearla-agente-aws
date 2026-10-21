@@ -64,4 +64,4 @@ Es un proyecto de evento: prioriza un agente funcional de punta a punta por sobr
 
 ## Autor
 
-Marcelo Caballero Olave · [LinkedIn](https://www.linkedin.com/in/marcelo-caballero-olave) · [Portafolio](https://portafolio.marcelo-caballero.workers.dev/)
+Marcelo Caballero Olave · [LinkedIn](https://www.linkedin.com/in/marcelo-caballero-olave) · [Portafolio](https://marcelocaballero.me/)
